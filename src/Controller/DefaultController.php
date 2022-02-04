@@ -14,13 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="main_homepage")
      */
     public function index(): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $productList = $entityManager->getRepository(Product::class)->findAll();
-        dd($productList);
         return $this->render('main/default/index.html.twig');
     }
 
@@ -42,17 +41,14 @@ class DefaultController extends AbstractController
             ->add('price', NumberType::class)
             ->add('quantity', IntegerType::class)
         ->getForm();
-//dump($product->getTitle());
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            //dd($data);
             $entityManager->persist($product);
             $entityManager->flush();
 
             return $this->redirectToRoute('product-edit', ['id' => $product->getId()]);
         }
-        //dd ($id, $form);
         return $this->render('main/default/edit_product.html.twig', [
             'form' => $form->createView()
         ]);
