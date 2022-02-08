@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Security;
+namespace App\Security\Admin;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,11 +20,11 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class LoginFormAuthentificatorAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
+class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'main_login';
+    public const LOGIN_ROUTE = 'admin_security_login';
 
     private $entityManager;
     private $urlGenerator;
@@ -95,7 +95,7 @@ class LoginFormAuthentificatorAuthenticator extends AbstractFormLoginAuthenticat
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('main_profile_index'));
+        return new RedirectResponse($this->urlGenerator->generate('admin_security_login'));
     }
 
     protected function getLoginUrl()
