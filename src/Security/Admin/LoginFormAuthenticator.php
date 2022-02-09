@@ -70,7 +70,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user || !in_array('ROLE_ADMIN', $user->getRoles())) {
-
             throw new UsernameNotFoundException('Email could not be found.');
         }
 
@@ -96,7 +95,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('admin_security_login'));
+        return new RedirectResponse($this->urlGenerator->generate('admin_dashboard_show'));
     }
 
     protected function getLoginUrl()
