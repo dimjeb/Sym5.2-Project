@@ -31,7 +31,7 @@ class ProductController extends AbstractController
      */
     public function edit(Request $request, Product $product = null): Response
     {
-        $form = $this->createForm(EditProductFormType::class, $product);
+        $form = $this->createForm(EditP);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -43,7 +43,7 @@ class ProductController extends AbstractController
         }
         return $this->render('admin/product/edit.html.twig', [
             'form' => $form->createView()
-        ])
+        ]);
     }
 
     /**
