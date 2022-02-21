@@ -17,7 +17,7 @@ class EditProductFormType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Title (from class)',
-                'required' => false,
+                'required' => true,
                 'constraints' => [
                     new NotBlank([],'Should be filled')
                 ]
