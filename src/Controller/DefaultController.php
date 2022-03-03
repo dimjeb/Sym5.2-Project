@@ -50,4 +50,12 @@ class DefaultController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/test", name="test")
+     */
+    public function test(): Response
+    {
+        return $this->render('main/test.html.twig');
+    }
 }
