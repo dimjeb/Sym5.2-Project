@@ -23,39 +23,4 @@ class DefaultController extends AbstractController
         $productList = $entityManager->getRepository(Product::class)->findAll();
         return $this->render('main/default/index.html.twig');
     }
-
-     /**
-     * @Route("/edit-product/{id}", name="product-edit", requirements={"id"="\d+"})
-     * @Route("/add-product", name="product-add")
-     */
-    public function editProduct(Request $request, int $id = null): Response
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-
-        if ($id) {
-            $product = $entityManager->getRepository(Product::class)->find($id);
-        } else {
-            $product = new Product();
-        }
-        $form = $this->createForm(EditProductFormType::class, $product);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($product);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('product-edit', ['id' => $product->getId()]);
-        }
-        return $this->render('main/default/edit_product.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-
-    /**
-     * @Route("/test", name="test")
-     */
-    public function test(): Response
-    {
-        return $this->render('main/test.html.twig');
-    }
 }
