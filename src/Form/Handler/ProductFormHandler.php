@@ -34,7 +34,7 @@ class ProductFormHandler
         $tempImageFilename = $newImageFile
             ? $this->fileSaver->saveUploadedFileIntoTemp($newImageFile)
             : null;
-
+dd($tempImageFilename);
         //TODO: add a new image with different sizes to the product
         // 1. save product's changes
         // 2. save uploaded file into temp dir
