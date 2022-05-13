@@ -65,6 +65,9 @@ class ProductManager
 
         $productDir = $this->getProductImagesDir($product);
 
-        dd($productDir);
+        $productImage = $this->productImagesManager->saveImageForProduct($productDir, $tempImageFilename);
+        $product->addProductImage($productImage);
+
+        return $product;
     }
 }
